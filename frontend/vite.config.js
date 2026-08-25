@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
+  base: '/fishgpt-laut/',
   root: 'src',
   server: {
     port: 3000,
