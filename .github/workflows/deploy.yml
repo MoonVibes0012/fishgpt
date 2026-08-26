@@ -4,8 +4,11 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -14,15 +17,15 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
-      - name: Install & Build Frontend
+      - name: Build
         run: |
           cd frontend
           npm install
           npm run build
 
-      - name: Deploy ke gh-pages
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
