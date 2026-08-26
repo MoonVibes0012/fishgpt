@@ -1,4 +1,4 @@
-name: Build & Deploy ke main
+name: Deploy ke GitHub Pages
 
 on:
   push:
@@ -25,14 +25,9 @@ jobs:
           npm install
           npm run build
 
-      - name: Deploy ke main
-        run: |
-          cd frontend/dist
-          git init
-          git add .
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
-          git commit -m "Deploy frontend ke main"
-          git branch -M main
-          git remote add origin https://github.com/MoonVibes0012/fishgpt.git
-          git push -f origin main
+      - name: Deploy ke gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./frontend/dist
+          publish_branch: gh-pages
